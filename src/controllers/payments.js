@@ -20,7 +20,7 @@ const receivePayment = async (req = request, res = response) => {
 };
 
 const collectDetails = async (req = request, res = response) => {
-  const { payment_method_id, payment } = req.body;
+  const { payment_method_id, payment, description } = req.body;
   const amount = Number(payment) * 100;
 
   try {
@@ -35,6 +35,7 @@ const collectDetails = async (req = request, res = response) => {
           },
         },
       },
+      description,
     });
 
     return res.send({

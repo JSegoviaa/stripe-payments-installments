@@ -15,6 +15,7 @@ let availablePlans = [];
 const confirmButton = document.getElementById('confirm-button');
 
 const payment = sessionStorage.getItem('payment');
+const description = sessionStorage.getItem('description');
 
 if (!payment) window.location.href = '/';
 
@@ -34,8 +35,8 @@ confirmButton.addEventListener('click', async (ev) => {
 
   const responseJson = await response.json();
 
-  if (!responseJson.ok) {
-    json.errors.map((error) => alert(error.msg));
+  if (!responseJson.success) {
+    responseJson.errors.map((error) => alert(error.msg));
   }
 
   document.getElementById('plans').hidden = true;
@@ -91,7 +92,11 @@ form.addEventListener('submit', async (ev) => {
     const response = await fetch('/api/payments/collect_details', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ payment_method_id: paymentMethod.id, payment }),
+      body: JSON.stringify({
+        payment_method_id: paymentMethod.id,
+        payment,
+        description,
+      }),
     });
 
     const json = await response.json();
