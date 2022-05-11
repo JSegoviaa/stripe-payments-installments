@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Accept a payment</title>
+    <meta name="description" content="A demo of a payment on Stripe" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="checkout.css" />
+    <script src="https://js.stripe.com/v3/"></script>
+  </head>
+  <body>
+    <div id="details">
+      <div id="payment-amount"></div>
+      <input id="cardholder-name" type="text" placeholder="Cardholder name" />
+      <form id="payment-form">
+        <div id="card-element"></div>
+        <button id="card-button">Siguiente</button>
+      </form>
+    </div>
+
+    <div id="plans" hidden>
+      <form id="installment-plan-form">
+        <label
+          ><input
+            id="immediate-plan"
+            type="radio"
+            name="installment_plan"
+            value="-1"
+          />De contado</label
+        >
+        <input id="payment-intent-id" type="hidden" />
+      </form>
+      <button id="confirm-button">Confirmar pago</button>
+    </div>
+
+    <div id="result" hidden>
+      <p id="status-message"></p>
+    </div>
+
+    <script src="./sendPayment.js" defer></script>
+    <script src="checkout.js" defer></script>
+    <script src="./showAmount.js" defer></script>
+  </body>
+</html>
