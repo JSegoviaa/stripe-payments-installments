@@ -15,6 +15,9 @@ router.post(
     check('payment', 'El pago debe ser mínimo de 10,000 MXN').isFloat({
       min: 10_000,
     }),
+    check('payment', 'El pago no puede exceder los 999,999.99 MXN').isFloat({
+      max: 999_999.99,
+    }),
     check('payment', 'La cantidad es obligatoria').not().isEmpty(),
     check('tipoPago', 'El tipo de pago es obligatorio').not().isEmpty(),
     check('description', 'La dirección del terreno es obligatoria')

@@ -35,9 +35,8 @@ confirmButton.addEventListener('click', async (ev) => {
   });
 
   const responseJson = await response.json();
-
   if (!responseJson.success) {
-    responseJson.errors.map((error) => alert(error.msg));
+    alert(responseJson.msg);
   }
 
   document.getElementById('plans').hidden = true;
