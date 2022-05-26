@@ -3,7 +3,7 @@ const { request } = require('express');
 const stripe = require('stripe')(process.env.PRIVATE);
 
 const receivePayment = async (req = request, res = response) => {
-  const { payment } = req.body;
+  const { payment, tipoPago, description } = req.body;
 
   try {
     if (payment < 10_000) {
@@ -12,7 +12,7 @@ const receivePayment = async (req = request, res = response) => {
         .json({ ok: false, msg: `La cantidad ${payment} no es suficiente` });
     }
 
-    return res.status(200).json({ ok: true, payment });
+    return res.status(200).json({ ok: true, payment, tipoPago, description });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ ok: false, msg: error });
@@ -20,7 +20,7 @@ const receivePayment = async (req = request, res = response) => {
 };
 
 const collectDetails = async (req = request, res = response) => {
-  const { payment_method_id, payment, description } = req.body;
+  const { payment_method_id, payment, description, tipoPago } = req.body;
   const amount = Number(payment) * 100;
 
   try {
@@ -36,6 +36,7 @@ const collectDetails = async (req = request, res = response) => {
         },
       },
       description,
+      metadata: { tipoPago },
     });
 
     return res.send({

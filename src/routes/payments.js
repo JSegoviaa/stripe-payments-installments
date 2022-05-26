@@ -16,6 +16,7 @@ router.post(
       min: 10_000,
     }),
     check('payment', 'La cantidad es obligatoria').not().isEmpty(),
+    check('tipoPago', 'El tipo de pago es obligatorio').not().isEmpty(),
     check('description', 'La dirección del terreno es obligatoria')
       .not()
       .isEmpty(),

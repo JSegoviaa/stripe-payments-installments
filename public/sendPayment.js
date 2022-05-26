@@ -1,6 +1,7 @@
 const getPayment = document.querySelector('#payment');
 const getValueForm = document.querySelector('#form');
 const getDescription = document.querySelector('#description');
+const getTipoPago = document.querySelector('#tipoPago');
 
 getValueForm.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -11,6 +12,7 @@ getValueForm.addEventListener('submit', async (e) => {
     body: JSON.stringify({
       payment: getPayment.value,
       description: getDescription.value,
+      tipoPago: getTipoPago.value,
     }),
   });
   const data = await res.json();
@@ -20,8 +22,9 @@ getValueForm.addEventListener('submit', async (e) => {
   }
 
   if (data.ok) {
-    sessionStorage.setItem('payment', payment.value);
-    sessionStorage.setItem('description', getDescription.value);
+    sessionStorage.setItem('payment', data.payment);
+    sessionStorage.setItem('description', data.description);
+    sessionStorage.setItem('tipoPago', data.tipoPago);
     window.location.href = '/checkout.html';
   }
 });

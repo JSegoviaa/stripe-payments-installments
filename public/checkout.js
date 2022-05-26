@@ -16,6 +16,7 @@ const confirmButton = document.getElementById('confirm-button');
 
 const payment = sessionStorage.getItem('payment');
 const description = sessionStorage.getItem('description');
+const tipoPago = sessionStorage.getItem('tipoPago');
 
 if (!payment) window.location.href = '/';
 
@@ -96,6 +97,7 @@ form.addEventListener('submit', async (ev) => {
         payment_method_id: paymentMethod.id,
         payment,
         description,
+        tipoPago,
       }),
     });
 
