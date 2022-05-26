@@ -4,10 +4,13 @@ const {
   collectDetails,
   confirmPayment,
   receivePayment,
+  get,
 } = require('../controllers/payments');
 const { validateFields } = require('../middlewares/validateFields');
 
 const router = Router();
+
+router.get('/get', get);
 
 router.post(
   '/receive_payment',

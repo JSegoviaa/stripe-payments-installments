@@ -25,4 +25,12 @@
     </form>
   </body>
   <script src="./sendPayment.js"></script>
+  <script>
+    const get = async () => {
+      const res = await fetch('/api/payments/get');
+      const data = await res.json();
+      return data;
+    };
+    get();
+  </script>
 </html>

@@ -2,6 +2,11 @@ const { response } = require('express');
 const { request } = require('express');
 const stripe = require('stripe')(process.env.PRIVATE);
 
+const get = async (req = request, res = response) => {
+  const date = Date.now();
+  res.json({ ok: true, date });
+};
+
 const receivePayment = async (req = request, res = response) => {
   const { payment, tipoPago, description } = req.body;
 
@@ -136,4 +141,4 @@ const confirmPayment = async (req = request, res = response) => {
   }
 };
 
-module.exports = { collectDetails, confirmPayment, receivePayment };
+module.exports = { collectDetails, confirmPayment, receivePayment, get };
